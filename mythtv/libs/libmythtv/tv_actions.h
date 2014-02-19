@@ -37,6 +37,7 @@
 #define ACTION_SEEKARB              "ARBSEEK"
 #define ACTION_SEEKRWND             "SEEKRWND"
 #define ACTION_SEEKFFWD             "SEEKFFWD"
+#define ACTION_SEEKFFWD2            "SEEKFFWD2"
 #define ACTION_JUMPFFWD             "JUMPFFWD"
 #define ACTION_JUMPRWND             "JUMPRWND"
 #define ACTION_JUMPBKMRK            "JUMPBKMRK"

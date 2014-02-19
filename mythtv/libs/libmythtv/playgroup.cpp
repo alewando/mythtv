@@ -75,6 +75,20 @@ class SkipAhead : public SpinBoxSetting, public PlayGroupDBStorage
     };
 };
 
+class SkipAhead2: public SpinBoxSetting, public PlayGroupDBStorage
+{
+  public:
+    SkipAhead2(const PlayGroupConfig& _parent):
+        SpinBoxSetting(this, 0, 600, 5, true,
+                       "(" + QObject::tr("default") + ")"),
+        PlayGroupDBStorage(this, _parent, "skipahead2") {
+        setLabel(QObject::tr("Skip ahead 2 (seconds)"));
+        setHelpText(QObject::tr("How many seconds to skip forward on a secondary fast "
+                                "forward."));
+    };
+};
+
+
 class SkipBack : public SpinBoxSetting, public PlayGroupDBStorage
 {
   public:
@@ -148,6 +162,7 @@ PlayGroupConfig::PlayGroupConfig(QString _name) : name(_name)
 
     cgroup->addChild(new TitleMatch(*this));
     cgroup->addChild(new SkipAhead(*this));
+    cgroup->addChild(new SkipAhead2(*this));
     cgroup->addChild(new SkipBack(*this));
     cgroup->addChild(new JumpMinutes(*this));
     cgroup->addChild(new TimeStretch(*this));

@@ -176,6 +176,7 @@ class MTV_PUBLIC PlayerContext
     PseudoState         pseudoLiveTVState;
 
     int                 fftime;
+    int                 fftime2;
     int                 rewtime;
     int                 jumptime;
     /** \brief Time stretch speed, 1.0f for normal playback.

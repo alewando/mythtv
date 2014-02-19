@@ -3083,6 +3083,7 @@ bool InitializeMythSchema(void)
 "  `name` varchar(32) NOT NULL DEFAULT '',"
 "  titlematch varchar(255) NOT NULL DEFAULT '',"
 "  skipahead int(11) NOT NULL DEFAULT '0',"
+"  skipahead2 int(11) NOT NULL DEFAULT '0',"
 "  skipback int(11) NOT NULL DEFAULT '0',"
 "  timestretch int(11) NOT NULL DEFAULT '0',"
 "  jump int(11) NOT NULL DEFAULT '0',"

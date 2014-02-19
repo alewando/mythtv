@@ -36,7 +36,7 @@ PlayerContext::PlayerContext(const QString &inUseID) :
     // pseudo states
     pseudoLiveTVRec(NULL), pseudoLiveTVState(kPseudoNormalLiveTV),
     // DB values
-    fftime(0), rewtime(0),
+    fftime(0), fftime2(0), rewtime(0),
     jumptime(0), ts_normal(1.0f), ts_alt(1.5f),
     // locks
     playingInfoLock(QMutex::Recursive), deletePlayerLock(QMutex::Recursive),
@@ -881,6 +881,7 @@ void PlayerContext::SetPlayingInfo(const ProgramInfo *info)
 void PlayerContext::SetPlayGroup(const QString &group)
 {
     fftime       = PlayGroup::GetSetting(group, "skipahead", 30);
+    fftime2      = PlayGroup::GetSetting(group, "skipahead2", 3);
     rewtime      = PlayGroup::GetSetting(group, "skipback", 5);
     jumptime     = PlayGroup::GetSetting(group, "jump", 10);
     ts_normal    = PlayGroup::GetSetting(group, "timestretch", 100) * 0.01f;

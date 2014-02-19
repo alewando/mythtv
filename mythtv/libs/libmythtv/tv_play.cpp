@@ -588,6 +588,8 @@ void TV::InitKeys(void)
             "Pause"), "P");
     REG_KEY("TV Playback", ACTION_SEEKFFWD, QT_TRANSLATE_NOOP("MythControls",
             "Fast Forward"), "Right");
+    REG_KEY("TV Playback", ACTION_SEEKFFWD2, QT_TRANSLATE_NOOP("MythControls",
+            "Fast Forward 2"), "V");
     REG_KEY("TV Playback", ACTION_SEEKRWND, QT_TRANSLATE_NOOP("MythControls",
             "Rewind"), "Left");
     REG_KEY("TV Playback", ACTION_SEEKARB, QT_TRANSLATE_NOOP("MythControls",
@@ -646,8 +648,8 @@ void TV::InitKeys(void)
             "Cycle audio channels"), "");
     REG_KEY("TV Playback", ACTION_TOGGLEUPMIX, QT_TRANSLATE_NOOP("MythControls",
             "Toggle audio upmixer"), "Ctrl+U");
-    REG_KEY("TV Playback", "TOGGLEPIPMODE", QT_TRANSLATE_NOOP("MythControls",
-            "Toggle Picture-in-Picture view"), "V");
+//    REG_KEY("TV Playback", "TOGGLEPIPMODE", QT_TRANSLATE_NOOP("MythControls",
+//            "Toggle Picture-in-Picture view"), "V");
     REG_KEY("TV Playback", "TOGGLEPBPMODE", QT_TRANSLATE_NOOP("MythControls",
             "Toggle Picture-by-Picture view"), "Ctrl+V");
     REG_KEY("TV Playback", "CREATEPIPVIEW", QT_TRANSLATE_NOOP("MythControls",
@@ -6354,7 +6356,7 @@ bool TV::SeekHandleAction(PlayerContext *actx, const QStringList &actions,
               kRelative = 64, kAbsolute = 128, kIgnoreCutlist = 256,
               kWhenceMask = 3;
     int flags = 0;
-    if (has_action(ACTION_SEEKFFWD, actions))
+    if (has_action(ACTION_SEEKFFWD, actions) || has_action(ACTION_SEEKFFWD2, actions) )
         flags = ARBSEEK_FORWARD | kForward | kSlippery | kRelative;
     else if (has_action("FFWDSTICKY", actions))
         flags = ARBSEEK_END     | kForward | kSticky   | kAbsolute;
@@ -6429,7 +6431,12 @@ bool TV::SeekHandleAction(PlayerContext *actx, const QStringList &actions,
                    /*timeIsOffset*/true,
                    /*honorCutlist*/!(flags & kIgnoreCutlist));
         else
-            DoSeek(actx, actx->fftime, tr("Skip Ahead"),
+            if (has_action(ACTION_SEEKFFWD, actions))
+                DoSeek(actx, actx->fftime, tr("Skip Ahead"),
+                   /*timeIsOffset*/true,
+                   /*honorCutlist*/!(flags & kIgnoreCutlist));
+            else 
+                DoSeek(actx, actx->fftime2, tr("Skip Ahead 2"),
                    /*timeIsOffset*/true,
                    /*honorCutlist*/!(flags & kIgnoreCutlist));
     }
